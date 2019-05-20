@@ -3,6 +3,6 @@ from . import views
 
 urlpatterns = [
     path('create', views.create, name='create'),
-    path('saveimagemove', views.saveimagemove, name='saveimagemove'),
+    path('savemove', views.savemove, name='savemove'),
     path('<int:game_id>/', views.detail, name='detail'),
 ]

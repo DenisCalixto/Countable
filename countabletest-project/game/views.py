@@ -4,12 +4,11 @@ from django.utils import timezone
 
 def home(request):
     games = Game.objects
-    return render(request, 'game/home.html', {'games':games}) #
+    return render(request, 'game/home.html', {'games':games})
 
 def detail(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
-    if game.image01 is None:
-        game.image01 = ""
+    current_move = 1
     return render(request,'game/detail.html', {'game':game})
 
 def create(request):
@@ -21,10 +20,17 @@ def create(request):
             game.save()
             return redirect('/game/' + str(game.id))
 
-def saveimagemove(request, game_id):
+def savemove(request):
     if request.method == 'POST':
-        if request.FILES['image']:
-            game = get_object_or_404(Game, pk=game_id)
-            game.image01 = request.FILE['image']
-            game.save()
-            return redirect('/game/' + str(game.id))
+        game = get_object_or_404(Game, pk=request.POST['game_id'])
+        if game.phrase03: # if the game already has last phrase, it is the last move
+            if request.FILES['image']:
+                game.image03 = request.FILE['image']
+                game.save()
+        else:
+            if game.phrase03: # if the game already has last phrase, it is the last move
+                if request.POST['phrase']:
+                    game.phrase02 = POST['phrase']
+                    game.save()
+
+        return redirect('/game/' + str(game.id))

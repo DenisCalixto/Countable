@@ -8,23 +8,73 @@
 <strong>{{ error }}</strong>
 {% endif %}
 
-  <!-- <h2>Game {{ game.id }}</h2>
+  <h2>Game {{ game.id }}</h2>
   <br><br>
-  Last move: <br>
-  {{game.phrase01}}
-  <br><br>
-  <h3>Your turn! Provide an image</h3>
-  Image: <br>
-  <img src="{{ game.image01.url }}" alt="">
-  <br><br>
-  <form id="saveimagemove" action="{% url 'saveimagemove' %}" method="post">
-    {% csrf_token %}
-    Image:
-    <input type="file" name="image">
-    <br><br>
-    <input type="submit" name="" value="">
-  </form> -->
+  <h3>Moves:</h3>
 
-  hi game
+  Current Move: {{ current_move }}
+
+  <!-- TESTING THE EXISTENCE OF EACH ONE OF THE MOVES -->
+  {% if game.phrase01 %}
+    Move 1: <br>
+    {{game.phrase01}}
+    <br><br>
+  {% endif %}
+
+  {% if game.image01 %}
+    Image: <br>
+    <img src="{{ game.image01.url }}" alt="">
+    <br><br>
+  {% endif %}
+
+  {% if game.phrase02 %}
+    Move 1: <br>
+    {{game.phrase02}}
+    <br><br>
+  {% endif %}
+
+  {% if game.image02 %}
+    Image: <br>
+    <img src="{{ game.image02.url }}" alt="">
+    <br><br>
+  {% endif %}
+
+  {% if game.phrase03 %}
+    Move 1: <br>
+    {{game.phrase03}}
+    <br><br>
+  {% endif %}
+
+  {% if game.image03 %}
+    Image: <br>
+    <img src="{{ game.image03.url }}" alt="">
+    <br><br>
+  {% endif %}
+
+  <!-- IF THE GAME HAS THE LAST IMAGE (IMAGE03)), THE GAME IS OVER -->
+  {% if game.image03 %}
+  {% else %}
+    <!-- CURRENT_MOVE CONTAINING AN ODD NUMBER INDICATES THAT AN IMAGE IS REQUIRED -->
+    {% if current_move == 1 %}
+      <h3>Your turn! Provide an image</h3>
+      <form id="savemove" action="{% url 'savemove' game.id %}" method="post">
+        {% csrf_token %}
+        Image:
+        <input type="file" name="image">
+        <br><br>
+        <input type="submit" name="" value="">
+      </form>
+    {% else %} <!-- CURRENT_MOVE CONTAINING AN EVEN NUMBER INDICATES THAT AN IMAGE IS REQUIRED -->
+      <h3>Your turn! Provide a phrase</h3>
+      <form id="savemove" action="{% url 'savemove' %}" method="post">
+        {% csrf_token %}
+        Phrase:
+        <input type="text" name="phrase" value="">
+        <br><br>
+        <input type="hidden" name="current_move" value="{{ current_move }}">
+        <input type="submit" name="" value="">
+      </form>
+    {% endif %}
+  {% endif %}
 
 {% endblock %}

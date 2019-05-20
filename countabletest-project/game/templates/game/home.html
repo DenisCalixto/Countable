@@ -5,6 +5,9 @@
 <main>
   <div class="creategame">
     <h2>Create Game</h2>
+
+    To create a game, you only need to type a phrase and hit the button!
+    <br><br>
     <form class="" action="{% url 'create' %}" enctype="multipart/form-data" method="post">
 
       {% csrf_token %} <!-- PROTECT THE FORM FROM COMMON ATTACKS -->
@@ -19,7 +22,7 @@
   {% for game in games.all %}
     <div class="game">
       <div class="">
-        <img src="{{ game.formated_creation_date }}" alt="">
+        {{ game.formated_creation_date }}
       </div>
     </div>
   {% endfor %}
