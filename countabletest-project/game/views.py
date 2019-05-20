@@ -8,8 +8,20 @@ def home(request):
 
 def detail(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
-    current_move = 1
-    return render(request,'game/detail.html', {'game':game})
+    if game.phrase03: # if third phrase exists, this is the fifth move. One to go
+        current_move = 5
+    else:
+        if game.image02:  # if second image exists, this is the forth move. Two to go
+            current_move = 4
+        else:
+            if game.phrase02:
+                current_move = 3
+            else:
+                if game.image01:
+                    current_move = 2
+                else:
+                    current_move = 1
+    return render(request,'game/detail.html', {'game':game, 'current_move': current_move})
 
 def create(request):
     if request.method == 'POST':

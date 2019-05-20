@@ -19,10 +19,17 @@
 
     </form>
   </div>
+  <br><br>
+  Existing Games:
   {% for game in games.all %}
     <div class="game">
       <div class="">
         {{ game.formated_creation_date }}
+        <a href="javascript:document.getElementById('detail').submit();">Join this game!</a>
+        <form id="detail" action="{% url 'detail' game.id %}" method="post">
+          {% csrf_token %} <!-- PROTECT THE FORM FROM ATTACKS -->
+          <input type="hidden" name="" value="">
+        </form>
       </div>
     </div>
   {% endfor %}

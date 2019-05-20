@@ -42,6 +42,8 @@ DATABASES = {
     }
 }
 
+- in the terminal, run the migrations: python3 manage.py migrate
+
 - run django server
 
 - you are good to go!
