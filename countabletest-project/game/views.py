@@ -21,7 +21,7 @@ def detail(request, game_id):
                     current_move = 2
                 else:
                     current_move = 1
-    return render(request,'game/detail.html', {'game':game, 'current_move': current_move})
+    return render(request,'game/detail.html', {'game':game})
 
 def create(request):
     if request.method == 'POST':
