@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Game Detail</h1>
+
+{% if error %}
+<strong>{{ error }}</strong>
+{% endif %}
+
+  <!-- <a href="{{ product.url }}">{{ product.title }}</a>
+  <br><br>
+  Body: <br>
+  <input type="text" name="body" value="{{ product.body }}" readonly>
+  <br><br>
+  Date: <br>
+  <input type="text" name="date" value="{{ product.pretty_date }}" readonly>
+  <br><br>
+  Icon: <br>
+  <img src="{{ product.icon.url }}" alt="">
+  <br><br>
+  Image: <br>
+  <img src="{{ product.image.url }}" alt="">
+  <br><br>
+  <a href="javascript:document.getElementById('upvote').submit();">Votes: {{ product.votes_total }}</a>
+
+  <form id="upvote" action="{% url 'upvote' product.id %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="" value="">
+  </form> -->
+
+{% endblock %}

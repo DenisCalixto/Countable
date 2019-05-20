@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'game.apps.GameConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'countabletest.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['countabletest/templates'], #HTML TEMPLATES FOLDER
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,4 +122,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'countabletest/static/'),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static') # STATIC (FILES WHICH ARE THE SAME FOR ALL WEBSITE)
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # WHERE MEDIA FILES SHOULD BE SAVED
+MEDIA_URL = '/media/' # WHERE SOMEONE TRYING TO ACCESS SOME MEDIA SHOULD GO
