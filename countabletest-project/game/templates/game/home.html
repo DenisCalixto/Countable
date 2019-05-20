@@ -2,6 +2,27 @@
 
 {% block content %}
 
-Hi game
+<main>
+  <div class="creategame">
+    <h2>Create Game</h2>
+    <form class="" action="{% url 'create' %}" enctype="multipart/form-data" method="post">
+
+      {% csrf_token %} <!-- PROTECT THE FORM FROM COMMON ATTACKS -->
+
+      Phrase: <br>
+      <input type="text" name="phrase" value="" required>
+      <br><br>
+      <input type="submit" name="" value="Create Game!">
+
+    </form>
+  </div>
+  {% for game in games.all %}
+    <div class="game">
+      <div class="">
+        <img src="{{ game.formated_creation_date }}" alt="">
+      </div>
+    </div>
+  {% endfor %}
+</main>
 
 {% endblock %}

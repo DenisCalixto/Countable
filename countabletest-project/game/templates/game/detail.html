@@ -8,25 +8,23 @@
 <strong>{{ error }}</strong>
 {% endif %}
 
-  <!-- <a href="{{ product.url }}">{{ product.title }}</a>
+  <!-- <h2>Game {{ game.id }}</h2>
   <br><br>
-  Body: <br>
-  <input type="text" name="body" value="{{ product.body }}" readonly>
+  Last move: <br>
+  {{game.phrase01}}
   <br><br>
-  Date: <br>
-  <input type="text" name="date" value="{{ product.pretty_date }}" readonly>
-  <br><br>
-  Icon: <br>
-  <img src="{{ product.icon.url }}" alt="">
-  <br><br>
+  <h3>Your turn! Provide an image</h3>
   Image: <br>
-  <img src="{{ product.image.url }}" alt="">
+  <img src="{{ game.image01.url }}" alt="">
   <br><br>
-  <a href="javascript:document.getElementById('upvote').submit();">Votes: {{ product.votes_total }}</a>
-
-  <form id="upvote" action="{% url 'upvote' product.id %}" method="post">
+  <form id="saveimagemove" action="{% url 'saveimagemove' %}" method="post">
     {% csrf_token %}
-    <input type="hidden" name="" value="">
+    Image:
+    <input type="file" name="image">
+    <br><br>
+    <input type="submit" name="" value="">
   </form> -->
+
+  hi game
 
 {% endblock %}
