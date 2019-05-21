@@ -1,4 +1,4 @@
-# Countable - Clark's Test
+# Countable - Pictionary Game
 
 Software required:
 
@@ -16,20 +16,23 @@ Instructions:
 - clone git repository:
 https://github.com/DenisCalixto/Countable.git
 
-- open a terminal, navigate to the project folder and create a virtual environment. I.e.: 'virtualenv myenv'
+- open a terminal, navigate to the root folder of the project (Readme file level) and create a virtual environment. I.e.: 'virtualenv myenv'
 
 - in the terminal, activate the virtual environment. 
 
 Linux or Mac: source /PATHTOENV/bin/activate
-Windows: c:\PATHTOENV\Scripts\activate
 
-- in the terminal, install django version 2.0.2: 'pip install django==2.0.2'
+Windows: c:\PATHTOENV\Scripts\activate.bat
 
-- in the terminal, install mysqlclient: 'pip install mysqlclient'
+- install django version 2.0.2: 'pip install django==2.0.2'
 
-- in the terminal, install Pillow (for the images): 'pip install Pillow'
+- install mysqlclient: 'pip install mysqlclient'
 
-- in settings.py, change the current database configurations according to your environment:
+- install Pillow (for the images): 'pip install Pillow'
+
+- navigate to folder countabletest-project
+
+- open the file countabletest-project\countabletest\settings.py and change the database configurations according to your environment:
 
 DATABASES = {
     'default': {
@@ -42,8 +45,8 @@ DATABASES = {
     }
 }
 
-- in the terminal, run the migrations: python3 manage.py migrate
+- in the terminal, navigate to the folder countabletest-project and run the migrations: python manage.py migrate
 
-- run django server
+- run django server: python manage.py runserver
 
-- you are good to go!
+- open url http://127.0.0.1:8000 in your browser and you are good to go!
