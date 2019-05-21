@@ -14,7 +14,7 @@ class Game(models.Model):
     image03 = models.ImageField(null=True, upload_to='images/')
 
     def __str__(self):
-        return self.title
+        return str(self.creation_date)
 
     def formated_creation_date(self):
         return self.creation_date.strftime('%b %e %Y')

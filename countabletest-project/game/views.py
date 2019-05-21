@@ -9,19 +9,16 @@ def home(request):
 def detail(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
     if game.phrase03: # if third phrase exists, this is the fifth move. One to go
-        current_move = 5
+        current_move = 'image'
+    elif game.image02:  # if second image exists, this is the forth move. Two to go
+        current_move = 'phrase'
+    elif game.phrase02: # if second phrase exists, this is the third move.
+        current_move = 'image'
+    elif game.image01: # if first image exists, this is the second move.
+        current_move = 'phrase'
     else:
-        if game.image02:  # if second image exists, this is the forth move. Two to go
-            current_move = 4
-        else:
-            if game.phrase02:
-                current_move = 3
-            else:
-                if game.image01:
-                    current_move = 2
-                else:
-                    current_move = 1
-    return render(request,'game/detail.html', {'game':game})
+        current_move = 'image'
+    return render(request,'game/detail.html', {'game':game,'current_move':current_move})
 
 def create(request):
     if request.method == 'POST':
@@ -30,19 +27,25 @@ def create(request):
             game.creation_date = timezone.datetime.now()
             game.phrase01 = request.POST['phrase']
             game.save()
-            return redirect('/game/' + str(game.id))
+            return redirect('/game/' + str(game.id)) # once created, show game's details
 
-def savemove(request):
+def savemove(request, game_id):
     if request.method == 'POST':
-        game = get_object_or_404(Game, pk=request.POST['game_id'])
-        if game.phrase03: # if the game already has last phrase, it is the last move
-            if request.FILES['image']:
-                game.image03 = request.FILE['image']
-                game.save()
+        game = get_object_or_404(Game, pk=game_id)
+        if game.phrase03: # if third phrase exists, this is the fifth move. One to go
+            game.image03 = request.FILES['image']
+            game.save()
+        elif game.image02:  # if second image exists, this is the forth move. Two to go
+            game.phrase03 = request.POST['phrase']
+            game.save()
+        elif game.phrase02: # if second phrase exists, this is the third move.
+            game.image02 = request.FILES['image']
+            game.save()
+        elif game.image01: # if first image exists, this is the second move.
+            game.phrase02 = request.POST['phrase']
+            game.save()
         else:
-            if game.phrase03: # if the game already has last phrase, it is the last move
-                if request.POST['phrase']:
-                    game.phrase02 = POST['phrase']
-                    game.save()
+            game.image01 = request.FILES['image']
+            game.save()
 
-        return redirect('/game/' + str(game.id))
+        return redirect('/game/' + str(game.id), {'message':'Move saved!'})
