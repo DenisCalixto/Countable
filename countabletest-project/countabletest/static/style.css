@@ -1,0 +1,135 @@
+/* GENERAL STYLING */
+
+body {
+  font-family: Verdana, sans-serif;
+  font-size: 1.2rem;
+}
+
+input[type=submit], button {
+  font-size: 1rem;
+  font-weight: bold;
+  border: 1px solid #000;
+  background-color: lightgrey;
+  height: 2rem;
+}
+
+header {
+  text-align: center;
+  background-color: lightgrey;
+  padding: 1.2rem;
+}
+
+header h1 {
+  margin: 0;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+/* CREATE A NEW GAME */
+
+.creategame {
+  width: 500px;
+  border: 1px solid grey;
+  padding: 1.2rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* EXISTING GAMES */
+
+.games {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.games .join a {
+  text-decoration: underline;
+}
+
+.games a:hover {
+  text-decoration: underline;
+}
+
+.gamesList {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.game {
+  flex-basis: 50%;
+  border: 1px solid grey;
+}
+
+.game h4 {
+  flex-basis: 50%;
+  margin: 0;
+  margin-bottom: .5rem;
+  padding: 1rem;
+  background-color: lightgrey;
+}
+
+.createdOn {
+  font-size: 1rem;
+}
+
+.join {
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+@media screen and (min-width: 600px)
+{
+  .game {
+    flex-basis: 25%;
+  }
+}
+
+/* GAME DETAIL */
+
+.gameDetail {
+  text-align: center;
+}
+
+.movesList {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.move {
+  flex-basis: 50%;
+  border: 1px solid grey;
+  text-align: center;
+
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.move div {
+  padding: .5rem;
+}
+
+.move .moveNumber {
+  background-color: lightgrey;
+}
+
+.nextMove {
+  width: 400px;
+  border: 1px solid grey;
+  padding: 1.2rem;
+  margin: 0 auto;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+@media screen and (min-width: 600px)
+{
+  .move {
+    flex-basis: 25%;
+  }
+}

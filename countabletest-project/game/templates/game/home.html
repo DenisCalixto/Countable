@@ -2,17 +2,16 @@
 
 {% block content %}
 
-<main>
   <div class="creategame">
-    <h2>Create Game</h2>
+    <h3>Create Game</h3>
 
-    To create a game, you only need to type a phrase and hit the button!
+    To create a game, type a phrase down and hit the button!
     <br><br>
     <form class="" action="{% url 'create' %}" enctype="multipart/form-data" method="post">
 
       {% csrf_token %} <!-- PROTECT THE FORM FROM COMMON ATTACKS -->
 
-      Phrase: <br>
+      Phrase:
       <input type="text" name="phrase" value="" required>
       <br><br>
       <input type="submit" name="" value="Create Game!">
@@ -20,21 +19,27 @@
     </form>
   </div>
   <br><br>
-  Existing Games:
   <div class="games">
-    {% for game in games.all %}
-      <div class="game">
-        <div class="">
-          {{ game.creation_date }}
-          <a href="javascript:document.getElementById('detail{{ game.id }}').submit();">Join this game!</a>
-          <form id="detail{{ game.id }}" action="{% url 'detail' game.id %}" method="post">
-            {% csrf_token %} <!-- PROTECT THE FORM FROM ATTACKS -->
-            <input type="hidden" name="" value="">
-          </form>
+    <h3>Existing Games:</h3>
+    <div class="gamesList">
+      {% for game in games.all %}
+        <div class="game">
+            <a href="javascript:document.getElementById('detail{{ game.id }}').submit();">
+              <h4>Game {{ game.id }}</h4>
+            </a>
+            <div class="createdOn">
+              Created on {{ game.creation_date }}
+            </div>
+            <div class="join">
+              <a href="javascript:document.getElementById('detail{{ game.id }}').submit();">Join this game!</a>
+              <form id="detail{{ game.id }}" action="{% url 'detail' game.id %}" method="post">
+                {% csrf_token %} <!-- PROTECT THE FORM FROM COMMON ATTACKS -->
+                <input type="hidden" name="" value="">
+              </form>
+            </div>
         </div>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
   </div>
-</main>
 
 {% endblock %}

@@ -2,80 +2,130 @@
 
 {% block content %}
 
-<h1>Game Detail</h1>
-
 {% if message %}
 <strong>{{ message }}</strong>
 {% endif %}
 
-<h2>Game {{ game.id }}</h2>
+<div class="gameDetail">
 
-<!-- TESTING THE EXISTENCE OF EACH ONE OF THE MOVES -->
-{% if game.phrase01 %}
-  Move 1: <br>
-  Phrase: <br>
-  {{game.phrase01}}
-  <br><br>
-{% endif %}
+  <h2>Game {{ game.id }}: Detail</h2>
 
-{% if game.image01 %}
-  Move 2: <br>
-  Image: <br>
-  <img src="{{ game.image01.url }}" alt="">
-  <br><br>
-{% endif %}
+  <div class="movesList">
+    <!-- TESTING THE EXISTENCE OF EACH ONE OF THE MOVES -->
+    {% if game.phrase01 %}
+      <div class="move">
+        <div class="moveNumber">
+          Move 1
+        </div>
+        <div class="moveType">
+          Phrase:
+        </div>
+        <div class="moveContent">
+          {{game.phrase01}}
+        </div>
+      </div>
+    {% endif %}
 
-{% if game.phrase02 %}
-  Move 3: <br>
-  Phrase: <br>
-  {{game.phrase02}}
-  <br><br>
-{% endif %}
+    {% if game.image01 %}
+      <div class="move">
+        <div class="moveNumber">
+          Move 2
+        </div>
+        <div class="moveType">
+          Image:
+        </div>
+        <div class="moveContent">
+          <img src="{{ game.image01.url }}" alt="">
+        </div>
+      </div>
+    {% endif %}
 
-{% if game.image02 %}
-  Move 4: <br>
-  Image: <br>
-  <img src="{{ game.image02.url }}" alt="">
-  <br><br>
-{% endif %}
+    {% if game.phrase02 %}
+      <div class="move">
+        <div class="moveNumber">
+          Move 3
+        </div>
+        <div class="moveType">
+          Phrase:
+        </div>
+        <div class="moveContent">
+          {{game.phrase02}}
+        </div>
+      </div>
+    {% endif %}
 
-{% if game.phrase03 %}
-  Move 5: <br>
-  Phrase: <br>
-  {{game.phrase03}}
-  <br><br>
-{% endif %}
+    {% if game.image02 %}
+      <div class="move">
+        <div class="moveNumber">
+          Move 4
+        </div>
+        <div class="moveType">
+          Image:
+        </div>
+        <div class="moveContent">
+          <img src="{{ game.image02.url }}" alt="">
+        </div>
+      </div>
+    {% endif %}
 
-{% if game.image03 %}
-  Move 6: <br>
-  Image: <br>
-  <img src="{{ game.image03.url }}" alt="">
-  <br><br>
-{% endif %}
+    {% if game.phrase03 %}
+      <div class="move">
+        <div class="moveNumber">
+          Move 5
+        </div>
+        <div class="moveType">
+          Phrase:
+        </div>
+        <div class="moveContent">
+          {{game.phrase03}}
+        </div>
+      </div>
+    {% endif %}
 
-<!-- IF THE GAME HAS THE LAST IMAGE (IMAGE03)), THE GAME IS OVER -->
-{% if game.image03 %}
-{% else %}
-  <!-- CURRENT_MOVE CONTAINING AN ODD NUMBER INDICATES THAT AN IMAGE IS REQUIRED -->
-  {% if current_move == 'image' %}
-    <h3>Your turn! Provide an image</h3>
-    <form id="savemove" action="{% url 'savemove' game.id %}" enctype="multipart/form-data" method="post">
-      {% csrf_token %}
-      Image:
-      <input type="file" name="image">
-      <br><br>
-      <input type="submit" name="" value="Make a move!">
-    </form>
-  {% else %} <!-- CURRENT_MOVE CONTAINING AN EVEN NUMBER INDICATES THAT AN IMAGE IS REQUIRED -->
-    <h3>Your turn! Provide a phrase</h3>
-    <form id="savemove" action="{% url 'savemove' game.id %}" method="post">
-      {% csrf_token %}
-      Phrase:
-      <input type="text" name="phrase" value="">
-      <br><br>
-      <input type="submit" name="" value="Make a move!">
-    </form>
+    {% if game.image03 %}
+      <div class="move">
+        <div class="moveNumber">
+          Move 6
+        </div>
+        <div class="moveType">
+          Image:
+        </div>
+        <div class="moveContent">
+          <img src="{{ game.image03.url }}" alt="">
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+
+  <!-- IF THE GAME HAS THE LAST IMAGE (IMAGE03)), THE GAME IS OVER -->
+  {% if game.image03 %}
+  {% else %}
+    <div class="nextMove">
+      <!-- CURRENT_MOVE CONTAINING AN ODD NUMBER INDICATES THAT AN IMAGE IS REQUIRED -->
+      {% if current_move == 'image' %}
+        <h3>Your turn! Provide an image</h3>
+        <form id="savemove" action="{% url 'savemove' game.id %}" enctype="multipart/form-data" method="post">
+          {% csrf_token %}
+          Image:
+          <input type="file" name="image">
+          <br><br>
+          <input type="submit" name="" value="Make a move!">
+        </form>
+      {% else %} <!-- CURRENT_MOVE CONTAINING AN EVEN NUMBER INDICATES THAT AN IMAGE IS REQUIRED -->
+        <h3>Your turn! Provide a phrase</h3>
+        <form id="savemove" action="{% url 'savemove' game.id %}" method="post">
+          {% csrf_token %}
+          Phrase:
+          <input type="text" name="phrase" value="">
+          <br><br>
+          <input type="submit" name="" value="Make a move!">
+        </form>
+      {% endif %}
+    </div>
   {% endif %}
-{% endif %}
 
+</div>
+
+<a href="{% url 'home' %}"><button type="button">Back</button></a>
 {% endblock %}
